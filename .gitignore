@@ -14,5 +14,16 @@ dist/
 # Prisma
 prisma/migrations/
 
+# next-pwa generated service worker files
+public/sw.js
+public/sw.js.map
+public/workbox-*.js
+public/workbox-*.js.map
+public/swe-worker-*.js
+public/swe-worker-*.js.map
+
+# Next.js generated
+next-env.d.ts
+
 # Misc
 generate-icons.mjs
