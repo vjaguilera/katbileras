@@ -1,0 +1,5 @@
+# Generated files
+dist/
+node_modules/
+generate-icons.mjs
+
