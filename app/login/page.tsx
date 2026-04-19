@@ -1,34 +1,37 @@
+'use client'
+
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { useNavigate, Navigate } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
+import { useRouter } from 'next/navigation'
 import styles from './Login.module.css'
 
-export default function Login() {
-  const { login, isAuthenticated } = useAuth()
-  const navigate = useNavigate()
+export default function LoginPage() {
+  const router = useRouter()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  if (isAuthenticated) return <Navigate to="/" replace />
-
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setError('')
     setLoading(true)
-    // Pequeño delay para evitar fuerza bruta básica
-    setTimeout(() => {
-      const ok = login(username.trim(), password)
-      if (ok) {
-        navigate('/', { replace: true })
-      } else {
-        setError('Usuario o contraseña incorrectos.')
-        setPassword('')
-      }
-      setLoading(false)
-    }, 300)
+
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: username.trim(), password }),
+    })
+
+    if (res.ok) {
+      router.push('/')
+      router.refresh()
+    } else {
+      const data = await res.json()
+      setError(data.error ?? 'Usuario o contraseña incorrectos.')
+      setPassword('')
+    }
+    setLoading(false)
   }
 
   return (
@@ -68,7 +71,11 @@ export default function Login() {
 
           {error && <p className={styles.error}>{error}</p>}
 
-          <button className={styles.btn} type="submit" disabled={loading || !username || !password}>
+          <button
+            className={styles.btn}
+            type="submit"
+            disabled={loading || !username || !password}
+          >
             {loading ? 'Ingresando…' : 'Ingresar'}
           </button>
         </form>
