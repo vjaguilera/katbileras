@@ -1,0 +1,23 @@
+.page {
+  padding: 1rem 0;
+}
+
+.title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: #1b4332;
+  margin: 0 0 0.75rem;
+  font-weight: 800;
+}
+
+.greeting {
+  font-size: 1.1rem;
+  color: #444;
+  margin: 0 0 1rem;
+}
+
+.description {
+  color: #666;
+  font-size: 1rem;
+  max-width: 520px;
+  line-height: 1.6;
+}
