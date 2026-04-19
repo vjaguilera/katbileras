@@ -16,6 +16,8 @@ interface AuthContextType {
 const USERS: Record<string, { password: string; name: string }> = {
   admin: { password: 'katbileras2024', name: 'Administrador' },
   familia: { password: 'familia123', name: 'Familia Katbileras' },
+  vicente: { password: 'Duende23', name: 'Vicente' },
+  jinan: { password: 'Paraiso1101', name: 'Jinan' },
 }
 
 const SESSION_KEY = 'katbileras_user'
