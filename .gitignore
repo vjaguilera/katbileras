@@ -11,8 +11,6 @@ dist/
 .env.local
 .env.*.local
 
-# Prisma
-prisma/migrations/
 
 # next-pwa generated service worker files
 public/sw.js
